@@ -20,6 +20,18 @@ pipeline {
             }
         }
         
+                // Security check with Aquasecurity (Trivy)
+        stage('Check Security - Trivy') {
+            steps {
+                script {
+                    def trivyResult = sh(returnStatus: true, script: "docker run --rm -v /var/run/docker.sock:/var/run/docker.sock aquasec/trivy:0.12.0 --no-progress ${REGISTRY}:latest")
+                    if (trivyResult != 0) {
+                        error("Security check failed. Trivy discovered critical vulnerabilities.")
+                    }
+                }
+            }
+        }
+        
         stage('Test') {
             steps {
                 echo 'Testing..'
