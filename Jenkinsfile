@@ -6,10 +6,17 @@ pipeline {
         }
     }
     
+    environment {
+        REGISTRY = "rbouikila/docker-test"
+    }
+    
     stages {
-        stage('Build') {
+       // Build docker image with docker-workflow plugin
+        stage('Build docker image') {
             steps {
-                echo 'Building..'
+                script {
+                    dockerImage = docker.build REGISTRY
+                }
             }
         }
         
