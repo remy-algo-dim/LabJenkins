@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade && \
+RUN DEBIAN_FRONTEND=noninteractive apt-get update && apt-get upgrade -y && \
     apt-get install -y python3-pip sshpass git openssh-client libhdf5-dev libssl-dev libffi-dev && \
     rm -rf /var/lib/apt/lists/* && \
     apt-get clean
