@@ -7,7 +7,7 @@ pipeline {
     }
     
     environment {
-        REGISTRY = "rbouikila/docker-test"
+        REGISTRY = "remyalgodim/docker-test"
     }
     
     stages {
