@@ -32,6 +32,17 @@ pipeline {
             }
         }
         
+            // Push docker image with docker-workflow plugin
+        stage('Publish image to registry - plugin ') {
+            steps {
+                script {
+                    docker.withRegistry('', 'remydockerhub') {
+                        dockerImage.push("latest")
+                    }
+                }
+            }
+        }
+        
         stage('Test') {
             steps {
                 echo 'Testing..'
